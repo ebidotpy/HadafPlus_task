@@ -7,4 +7,7 @@ sentence-transformers
 torch
 ollama
 langchain-text-splitters
-
+fastapi
+uvicorn
+python-multipart
+pydantic

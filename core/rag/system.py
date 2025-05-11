@@ -7,6 +7,7 @@ from core.vectorstore.manager import VectorStoreManager
 from core.embedding.persian_embedding_manager import PersianEmbeddingManager
 from core.llm.llama_persian_llm import PersianLlamaInterface
 from core.prompt_structure.prompts_manager import PromptEngineer
+from config.settings import settings
 
 class PersianRAGSystem:
     """Orchestrates all components while maintaining SRP"""
@@ -19,9 +20,18 @@ class PersianRAGSystem:
         
         # Initialize components
         self.document_loader = DocumentLoader(pdf_dir)
-        self.text_splitter = PersianTextSplitter()
-        self.embedding_manager = PersianEmbeddingManager(self.device)
-        self.llm_interface = PersianLlamaInterface()
+        self.text_splitter = PersianTextSplitter(
+            chunk_size=settings.CHUNK_SIZE, 
+            chunk_overlap=settings.CHUNK_OVERLAP
+        )
+        self.embedding_manager = PersianEmbeddingManager(
+            device=self.device, 
+            embedding_model=settings.EMBEDDING_MODEL
+        )
+        self.llm_interface = PersianLlamaInterface(
+            model=settings.LLM_MODEL, 
+            temprature=settings.LLM_TEMPERATURE
+        )
         self.prompt_engineer = PromptEngineer()
     
     def initialize(self):
@@ -34,7 +44,10 @@ class PersianRAGSystem:
         
         # Vector store pipeline
         embeddings = self.embedding_manager.get_embeddings()
-        vector_store = VectorStoreManager(embeddings)
+        vector_store = VectorStoreManager(
+            embeddings=embeddings, 
+            persist_dir=settings.VECTOR_STORE_PATH
+        )
         self.retriever = vector_store.create_store(split_docs)
         
         # LLM pipeline
