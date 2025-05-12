@@ -75,3 +75,7 @@ class PersianRAGSystem:
             return self.chain.invoke(formatted_question)
         except Exception as e:
             return f"Error processing query: {str(e)}"
+        
+    def get_retrieved_documents(self, question: str, k: int = 3) -> list:
+      """Directly access retrieved documents"""
+      return self.retriever.get_relevant_documents(question, k=k)

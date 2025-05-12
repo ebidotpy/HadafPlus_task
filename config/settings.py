@@ -10,7 +10,7 @@ class Settings:
     VECTOR_STORE_PATH = "/home/ebi/machinelearning/HadafPlus_task/data/processed/faiss_index"
     
     # LLM
-    LLM_MODEL = "llama3.2"
+    LLM_MODEL = "llama3"
     LLM_TEMPERATURE = 0.7
 
 settings = Settings()

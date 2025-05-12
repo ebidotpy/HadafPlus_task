@@ -4,6 +4,7 @@ class QueryRequest(BaseModel):
     question: str
  
 class QueryResponse(BaseModel):
+    question: str
     answer: str
-    sources: list[str] = []
+    sources: str
     processing_time: float

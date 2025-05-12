@@ -35,5 +35,24 @@ ollama pull llama3
 pip install -r requirements.txt
 '''
 
+6. Log in on your huggingface acoount with this command (before running command prepare your huggingface token):
+'''bash 
+huggingface-cli login
+'''
+NOTE: If the above command didn't worked make soure you have installed huggingface_hub liberary. for installing it you can use below command:
+'''bash
+pip install -U "huggingface_hub[cli]"
+'''
+
 ## 💻 Usage
 
+1. Start the application with one of this commands:
+'''bash
+python main.py
+uvicorn api.server:app --host 0.0.0.0 --port 8000 --reload
+'''
+
+1. Navigate to this url on your browser:
+'''bash
+http://0.0.0.0:8000/docs
+'''
