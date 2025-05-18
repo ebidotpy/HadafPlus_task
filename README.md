@@ -4,7 +4,7 @@
 ## 🚀 Installation
 
 1. Clone this repository:
-'''bash
+''' bash
 git clone https://github.com/ebidotpy/HadafPlus_task.git
 cd HadafPlus_task
 '''
